@@ -1,0 +1,371 @@
+\ProvidesPackage{beamersetup}
+%
+%%\makeatletter
+%%\newcommand\listframessec{\@starttoc{allframessec}}
+%%\makeatother
+%%\usetheme{default}
+%
+%
+\subtitle{Processi astrofisici: hydrodynamics (turbulence, shock, hydrostatic equilibrium, Jeans instab., accretion, wind, selfsimilarity), Radiative transfer(Radiative equilibrium(LTE), atmosphere, )}
+
+\date{2023 Luglio, \today}
+
+\subject{}
+
+\makeatletter
+\setbeamertemplate{frametitle}{
+\vspace*{-1mm}
+    \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+    \@tempdima=\textwidth%
+    \advance\@tempdima by\beamer@leftmargin%
+    \advance\@tempdima by\beamer@rightmargin%
+    %\hspace*{1cm} %%%%%%%%%%%%% For example insert shift to right
+    \begin{beamercolorbox}[sep=0.3cm,center,wd=\the\@tempdima]{frametitle}
+        \usebeamerfont{frametitle}%
+        \vbox{}\vskip-1ex%
+        \if@tempswa\else\csname beamer@ftecenter\endcsname\fi%
+        \strut\insertframetitle\strut\par%
+        {%
+            \ifx\insertframesubtitle\@empty%
+            \else%
+            {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+            \fi
+        }%
+        \vskip-1ex%
+        \if@tempswa\else\vskip-.0cm\fi% set inside beamercolorbox... evil here...
+\end{beamercolorbox}%
+\vspace*{-3mm}
+}
+
+\makeatother
+\makeatletter
+\addtobeamertemplate{frametitle}{
+    \ifframeinlbf
+\mode<presentation>{%
+        \only<1>{%
+            %\hypertarget{\protect\insertframetitle}{}%
+            %        \addcontentsline{cherryframes}{subsection}{%
+                    %\protect\makebox[1em][l]{\normalsize\insertframenumber\hfill}
+                       % \normalsize
+           %            \protect\insertframetitle%
+                    %\addtocontents{cherryframes}{\protect\mycontentsline{section}{\parbox{0.48\textwidth}{\protect$\bullet$ \insertframetitle}}{}{}}
+\let\aux\insertframetitle
+\let\auxlink\insertframenumber
+    \linkdest{linkframecherry-\auxlink}
+%\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partnameshort}{\the\c@page}}%
+    \addtocontents{cherryframes}{\protect\mycontentsline{section}{\parbox{0.48\textwidth}{$\bullet$ \aux}}{}{linkframecherry-\auxlink}}
+        }%
+    }%
+             \else\fi%
+
+    %\ifframeinlbf
+  %\addcontentsline{cherryframes}{section}{\protect\makebox[2em][l]{%
+  %  \protect\usebeamercolor[fg]{structure}\insertframenumber\hfill}%
+  %$\protect\hyperlink{page.\insertframenumber}\insertframetitle\par}%
+  %\else\fi
+%%        \protect\beamer@subsectionintoc{\protect\the\c@section}{0}{%
+%%            \protect\insertframetitle%
+%%        }{\protect\the\c@page}{\protect\the\c@part}{\protect\the\beamer@tocsectionnumber}%
+%    \addtocontents{secfr-\thesection}{\protect\mycontentsline{subsubsection}{\parbox{0.48\textwidth}{\protect$\bullet$ \protect\insertframetitle}}{}{}}%make newcommand as frame in lbf as \insertframetitle is expanded after
+    \vspace*{-1mm}
+}{
+    \frameinlbffalse
+    %\addtocontents{secfr-\thesection}{\protect\mycontentsline{subsection}{\protect\makebox[2em][l]{%
+    %\protect\usebeamercolor[fg]{structure}\insertframenumber}%
+%\insertframetitle\par%
+%}{}{secfr-\thesection}}%%
+  %    \mode<presentation>{%
+  %      \only<1>{%
+ \ifx\beamer@shortframetitle\beamer@frametitle
+                \ifx\insertframesubtitle\@empty%
+                    %\frame{a}
+                \else
+                    %framesubstitle - prioritate 2
+                   % \frame{b}
+                    \let\aux\insertframesubtitle
+                    \let\auxlink\insertframenumber
+    \phantomsection\linkdest{linkframesec-\auxlink}
+%\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partnameshort}{\the\c@page}}%
+    \addtocontents{secfr-\thesection}{\protect\mycontentsline{section}{\parbox{0.48\textwidth}{$\bullet$ \aux}}{}{linkframesec-\auxlink}}
+                        %\addtocontents{secfr-\thesection}{\protect\mycontentsline{subsection}{\parbox{0.48\textwidth}{$\bullet$ \aux}}{}{}}
+
+                \fi
+            \else
+                %short title - prioritaet 1
+                \frame{c}
+            \fi
+%        }%
+%    }%
+    \vspace*{-3mm}
+}
+\makeatother
+%% Beamer margin
+\setbeamersize{text margin left=2pt, text margin right=30pt}
+%% In beamer, these changes can be made in the preamble
+\addtolength{\topmargin}{0pt}
+\addtolength{\headsep}{3pt minus 2pt}
+\addtolength{\oddsidemargin}{-1pt}
+\addtolength{\evensidemargin}{-1pt}
+\addtolength{\marginparwidth}{0pt}
+\addtolength{\marginparsep}{-1pt}
+\addtolength{\textwidth}{24pt}
+%%\geometry{margin=1pt}
+%%\setbeamersize{text margin left = -2cm, text margin right = -2cm}
+\newcommand{\setmuskip}[2]{#1=#2\relax} %%problem usinigmu with calc (req by mathtools) loaded
+%%default with calc? https://tex.stackexchange.com/questions/188215/mathtools-with-mu-illegal-unit
+\setmuskip{\medmuskip}{0mu plus 0mu minus 0mu}
+\makeatletter
+%%\setlength{\parskip}{fixed amount plus amount to stretch minus amount to shrink}GLUE
+%%%\setbeamersize{cosa=size}
+%%\arraycolsep=5pt                  % distance between 2 columns 
+%%\thinmuskip=3mu                   % space between ordinary and operator atoms 
+%%\medmuskip=4mu plus 2mu minus 4mu % space between ordinary and binary atoms 
+%%\thickmuskip=5mu plus 5mu         % space between ordinary and relation atoms 
+%%\setlength\jot{-30pt}
+%%\renewcommand\arraystretch{1}
+%%\def\>{\mskip\medmuskip}
+%%\def\;{\mskip\thickmuskip}
+%%\def\!{\mskip-\thinmuskip
+%%\abovedisplayskip=12pt plus 3pt minus 9pt 
+%%\belowdisplayskip=12pt plus 3pt minus 9pt
+%%\abovedisplayshortskip=0pt plus 3pt 
+%%\belowdisplayshortskip=7pt plus 3pt minus 4pt
+\g@addto@macro\normalsize{%
+%%    \setlength{\tagmarginsep}{0pt}
+    %\everydisplay{\displayindent=\tagmarginsep \displaywidth=\dimexpr\linewidth-2\tagmarginsep}
+%%\renewcommand\normalsize{
+%%\setlength\thinmuskip{0pt}%=
+%%\setlength\medmuskip{0pt plus 0pt minus 0pt}%=
+%%\setlength\thickmuskip{0pt plus 0pt}%=
+\setlength\abovedisplayskip{1pt minus 1pt}
+\setlength\belowdisplayskip{1pt minus 1pt}
+\setlength\abovedisplayshortskip{1pt minus 1pt}
+\setlength\belowdisplayshortskip{1pt minus 1pt}
+\setlength{\parindent}{-1pt}
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\setlength{\jot}{-0pt}
+\setlength{\mathindent}{-0pt plus 1pt minus 2pt}
+\setlength{\itemindent}{-0pt}
+\setlength{\leftmargini}{\dimexpr\leftmargini-2pt\relax}
+\setlength\columnsep{1pt}
+%%\setbeamersize{text margin left=-2cm,text margin right=1mm} 
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+}
+
+%%\addtobeamertemplate{frametitle}{\vspace*{-0.3cm}\relax}{\vspace*{-1.7cm}\relax}
+
+\addtobeamertemplate{frame begin}{
+\vspace*{-6mm}
+}{
+\setlength\columnsep{1pt}
+\setlength\abovedisplayskip{1pt minus 1pt}
+\setlength\belowdisplayskip{1pt minus 1pt}
+\setlength\abovedisplayshortskip{1pt minus 1pt}
+\setlength\belowdisplayshortskip{1pt minus 1pt}
+\setlength{\parindent}{-5pt}
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\setlength{\jot}{-0pt}
+\setlength{\mathindent}{-50pt plus 1pt minus 2pt}
+\setlength{\itemindent}{-0pt}
+%%\setlength{\leftmargini}{-1mm}
+%%\setbeamersize{text margin left=-2cm,text margin right=1mm} 
+\setlength{\parindent}{0pt}\@afterindentfalse\@afterheading
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\setlength{\jot}{-0pt}
+\setlength{\leftmargini}{0mm}
+\addtolength{\itemsep}{0.5\baselineskip}
+%\frameinlbffalse
+}
+\addtobeamertemplate{block begin}{
+\setlength\abovedisplayskip{1pt}
+\setlength\belowdisplayskip{1pt}
+\setlength\abovedisplayshortskip{1pt}
+\setlength\belowdisplayshortskip{1pt}
+%%\setlength\itemindent{1pt}
+}{}
+\addtobeamertemplate{block begin}{\vspace*{-3pt}}{}
+\addtobeamertemplate{block end}{}{\vspace*{-3pt}}
+%
+\addtobeamertemplate{block begin}{}{\setlength{\parindent}{0pt}\@afterindentfalse\@afterheading}
+%%\setlength\parindent{0pt plus 0pt minus 0pt}
+%
+\addtobeamertemplate{block begin}{}{\setlength{\parskip}{0pt plus 0pt minus 0pt}}
+%%\setlength\parskip{3pt plus 0pt minus 0pt}
+%
+\addtobeamertemplate{block begin}{}{\setlength{\jot}{-0pt}}
+%%\setlength\jot{0pt plus 0pt minus 0pt}
+%
+\addtobeamertemplate{block begin}{}{\setlength{\mathindent}{1pt plus 5pt minus 10pt}}
+%%\setlength\mathindent{0pt plus 0pt minus 0pt}
+%
+%%\addtobeamertemplate{block begin}{}{\setlength{\leftmargini}{0mm}}
+%%\setlength\leftmargini{-2pt}
+%%%}?
+%%https://tex.stackexchange.com/questions/115907/how-do-i-remove-white-space-above-itemize-command-in-beamer-using-enumitem
+%%It's not a good idea to use the enumitem package with beamer since beamer has its own ways of dealing with the standard list-like environments. Just by loading enumitem when using beamer you loose the special beamer formatting and the overlay-awareness of the list-like components.
+
+\renewcommand{\itemize}[1][]{%
+\beamer@ifempty{#1}{}{\def\beamer@defaultospec{#1}}%
+\ifnum \@itemdepth >2\relax\@toodeep\else
+\advance\@itemdepth\@ne
+\beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+\usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+\usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+\list{\usebeamertemplate{itemize \beameritemnestingprefix item}}{\def\makelabel##1{%
+        {%
+   \hss\llap{{%
+                    \usebeamerfont*{itemize \beameritemnestingprefix item}%
+                    \usebeamercolor[fg]{itemize \beameritemnestingprefix item}##1}}%
+        }%
+    }%
+}
+\fi%
+\beamer@cramped%
+\raggedright%
+\beamer@firstlineitemizeunskip%
+}
+
+%%\setlist[itemize,0]{%leftmargin=\dimexpr 26pt-.5in
+%%align=left, leftmargin=-5pt,label=*,labelwidth=10pt
+%%}
+\makeatother
+%
+\hypersetup{pdfpagemode=FullScreen}
+%
+\addtobeamertemplate{block begin}{%
+%\setlength{\textwidth}{0.99\textwidth}%
+\setlength\abovedisplayskip{0pt}%
+}{}
+%
+\setbeamertemplate{caption}{\insertcaption}
+\setbeamercolor{author}{fg=blue}
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{subtitle}{size=\Large, series=\bfseries}
+\setbeamerfont{author}{size=\footnotesize}
+\setbeamerfont{date}{size=\small}
+%
+\setbeamertemplate{section page}
+{
+\begin{beamercolorbox}[sep=10pt,center,rounded=true,shadow=true]{part title}
+    \usebeamerfont{section title}\insertsection\par
+\end{beamercolorbox}
+}
+%
+\setbeamertemplate{subsection page}
+{
+\begingroup
+\begin{beamercolorbox}[sep=2pt,center,rounded=true,shadow=true]{section title}% sep= vertical space around text (between text and box border)
+    \usebeamerfont{section title}\insertsection\par
+\end{beamercolorbox}
+\vspace*{-1.pt}%    \vspace*{10pt}
+\begin{beamercolorbox}[sep=6pt,center,rounded=true,shadow=true]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+\end{beamercolorbox}
+\endgroup
+}
+\setbeamerfont{section title}{size=\Large,series=\bfseries}
+\setbeamerfont{subsection title}{size=\large,series=\bfseries}
+%
+%%\AtBeginDocument{%
+%%\addtolength\abovedisplayskip{-0.5\baselineskip}%
+%%\addtolength\belowdisplayskip{-1\baselineskip}%
+%%\addtolength\abovedisplayshortskip{-0.5\baselineskip}%
+%%\addtolength\belowdisplayshortskip{-1\baselineskip}%
+%%}
+%%\setlength{\mathindent}{0pt}
+%
+%\setcounter{tocdepth}{-1} 
+%
+\makeatletter
+%%% number, shortname, page.
+\providecommand\beamer@partintoc[3]{%
+\ifnum\c@tocdepth=-1\relax
+% requesting onlyparts.
+    \makebox[0.1\paperwidth]{Part #1:} \parbox{0.90\paperwidth}{#2(#3)}
+\par
+\fi
+}%
+%
+\define@key{beamertoc}{onlyparts}[]{%
+\c@tocdepth=-1\relax
+}
+%
+\AtBeginPart{%
+    \linkdest{linkpart-\thepart}
+%\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partnameshort}{\the\c@page}}%
+    \addtocontents{toc}{\protect\mycontentsline{section}{\parbox{0.48\textwidth}{ \protect\beamer@partintoc{\the\c@part}{\beamer@partnameshort}{\the\c@page}}}{}{linkpart-\thepart}}
+
+%%\addtocontents{toc}{\mycontentsline{section}{contenuto}{mannaggia}{sdsd}}%
+%
+\frameinlbffalse
+\frame{\partpage}
+\frameinlbffalse
+\begin{frame}[allowframebreaks]{Outline: \insertpart}%\insertpart
+    \tableofcontents%sectionstyle=show/shaded
+\end{frame}
+}
+%
+\makeatother%
+%%%Display section subsection (title page) at beginning section subsection
+\AtBeginSection{
+\frameinlbffalse
+\frame{\sectionpage}
+\frameinlbffalse
+\begin{frame}{Lista frame importanti di questa sezione}
+   \listofsecframes
+\end{frame}
+%%\addtocounter{sectionkey}{1}%using \thesection
+}
+\AtBeginSubsection{
+\frameinlbffalse
+\frame{\subsectionpage}}
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}
+{
+\leavevmode%
+\hbox{%Refintro
+    \begin{beamercolorbox}[wd=.1\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%
+        \hyperlink{rl1617}{17}-\hyperlink{rl1819}{19}-\hyperlink{rl2122}{22}|\hyperlink{succo}{Succo}%
+    \end{beamercolorbox}%
+}%
+\hbox{%
+    \begin{beamercolorbox}[wd=.2\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%refs Part 2
+        %\ifthenelse{\value{page}<\getpagerefnumber{stellarsolve}\and\value{page}>\getpagerefnumber{stellarstructure}}{ \hyperlink{stellarstructure}{\emph{SSE}}}{\hyperlink{stellarstructure}{\textbf{SSE}}}
+%%\value{page},\numexpr\getpagerefnumber{stellarstructure}\relax
+        \hyperlink{stellarstructure}{SSE}:\hyperlink{stellarstructure}{EqS}--\hyperlink{transport}{trans}(\hyperlink{trarad}{rad}-\hyperlink{kapparad}{$\kappa$}-\hyperlink{tracond}{cond}-\hyperlink{traconv}{$\alpha$}-\hyperlink{diffusion}{diff})-\hyperlink{stellarplasma}{m\&M}-\hyperlink{luminositysourcessinks}{$\epsilon$}(\hyperlink{epsilong}{$\epsilon_g$}-\hyperlink{epsilonn}{$\epsilon_n$}\hyperlink{epsilonpp}{$PP$}-\hyperlink{epsiloncno}{CNO}-\hyperlink{epsilonheavy}{late}-\hyperlink{epsilonnu}{$\nu$})%
+    \end{beamercolorbox}%Equazioni struttura stellare, input, stabilit\'a
+}%
+\hbox{%
+    \begin{beamercolorbox}[wd=.1\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%refs nummod
+\hyperlink{stellarsolve}{solve}:\hyperlink{fourODE}{4ODE}-\hyperlink{poly}{poly}-\hyperlink{henyey}{Hey}-\hyperlink{shooting}{first$*$}%
+\end{beamercolorbox}%Soluzione modelli stellari
+}%
+\hbox{%
+    \begin{beamercolorbox}[wd=.1\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%refs star formation to pre-MS
+	\hyperlink{starformation}{$*$Formation}:\hyperlink{protostellar}{proto}-\hyperlink{preMS}{pMS}%
+\end{beamercolorbox}%
+}%
+\hbox{%
+   \begin{beamercolorbox}[wd=.3\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%refs stellarevolution
+            \hyperlink{stellarevolution}{Evol}:\hyperlink{preMS}{PMS}-\hyperlink{MS}{MS}-\hyperlink{LMS}{LMS}-\hyperlink{UMS}{UMS}-\hyperlink{MSdeps}{deps}-\hyperlink{malure}{M-L}-\hyperlink{postMS}{postMS}-\hyperlink{ZAHB}{ZAHB}-\hyperlink{HBlowM}{HBlowM}-\hyperlink{HBIM}{HB-I/M}-\hyperlink{HBpulsating}{HB-puls}-\hyperlink{AGB}{AGB}-\hyperlink{WD}{WD}-\hyperlink{lateintM}{lateintm}-\hyperlink{SN}{SN}%
+        \end{beamercolorbox}%Equazioni struttura stellare
+    }%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.12\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%refs 
+	\hyperlink{U}{U}:\hyperlink{BBN}{BBN}|\hyperlink{mw}{MW}|\hyperlink{starpop}{pop}:\hyperlink{oldPPS}{oPPS}-\hyperlink{youngPPS}{yPPS}-\hyperlink{ageindicator}{age}-\hyperlink{USP}{uSP}%
+\end{beamercolorbox}%Popolazione stellare/ Galassia
+}%
+\hbox{%
+    \begin{beamercolorbox}[wd=.05\paperwidth,ht=5.5ex,dp=0ex,center]{author in head/foot}%
+% %   \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{}/\inserttotalframenumber{}%
+        \end{beamercolorbox}%}%
+    %\vskip{0pt}%
+    }%
+    \vspace*{-3mm}    
+}%
+    \makeatother
+    \beamertemplatenavigationsymbolsempty

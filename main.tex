@@ -1,0 +1,233 @@
+%! TEX root = main.tex
+\makeatletter%stellare(~/Fisica-Stellare)
+\let\@starttocorig\@starttoc
+\makeatother%%
+
+\documentclass[8pt,xcolor={usenames},fleqn]{beamer}
+
+\usefonttheme{serif} % default family is serif
+
+%% colors
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{brilliantlavender}{rgb}{0.96, 0.73, 1.0}
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
+\definecolor{violetw}{rgb}{0.93, 0.51, 0.93}
+\definecolor{Veronica}{rgb}{0.63, 0.36, 0.94}
+\definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{brightcerulean}{rgb}{0.11, 0.67, 0.84}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+\definecolor{ochre}{rgb}{0.8, 0.47, 0.13}
+\definecolor{midnightblue}{rgb}{0.1, 0.1, 0.44}
+\definecolor{lemon}{rgb}{1.0, 0.97, 0.0}
+\definecolor{grey}{rgb}{0.7, 0.75, 0.71}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{bf}{RGB}{88, 86, 88}
+\definecolor{bb}{RGB}{177, 177, 177}
+\definecolor{keyword}{rgb}{0.25, 0.25, 0.28}
+\definecolor{todo}{rgb}{0.75, 0.0, 0.2}
+\definecolor{must}{rgb}{1.0, 0.31, 0.0}
+% redefine frame
+\addtobeamertemplate{headline}{\vskip-3pt}{}
+%define \mycontentsline
+\makeatletter
+\protected\def\Hy@toclinkstart{\hyper@linkstart{link}{\Hy@tocdestname}}
+\protected\def\Hy@toclinkend{\hyper@linkend}
+\def\mycontentsline#1#2#3#4{%
+  \begingroup
+    \Hy@safe@activestrue
+  \edef\x{\endgroup
+    \def\noexpand\Hy@tocdestname{#4}%
+  }\x
+  \ifx\Hy@tocdestname\ltx@empty
+    \csname l@#1\endcsname{#2}{#3}%
+  \else
+    \ifcase\Hy@linktoc % none
+      \csname l@#1\endcsname{#2}{#3}%
+    \or % section
+      \csname l@#1\endcsname{%
+        \Hy@toclinkstart{#2}\Hy@toclinkend
+      }{#3}%
+    \or % page
+      \def\Hy@temp{#3}%
+      \ifx\Hy@temp\ltx@empty
+        \csname l@#1\endcsname{#2}{#3}%
+      \else
+        \csname l@#1\endcsname{{#2}}{%
+          \Hy@toclinkstart{#3}\Hy@toclinkend
+        }%
+      \fi
+    \else % all
+      \def\Hy@temp{#3}%
+      \ifx\Hy@temp\ltx@empty
+        \csname l@#1\endcsname{%
+          \Hy@toclinkstart{#2}\Hy@toclinkend
+        }{}%
+      \else
+        \csname l@#1\endcsname{%
+          \Hy@toclinkstart{#2}\Hy@toclinkend
+        }{%
+          \Hy@toclinkstart{#3}\Hy@toclinkend
+        }%
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% importa pacchetti
+\usepackage{usepkg}
+\usepackage{morewrites}
+\usepackage{makerobust}
+\MakeRobust\usebeamertemplate
+\usepackage{beamersetup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Funzioni generali
+\usepackage{functions}
+%http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
+%%
+%beamer setup
+
+%%%% COUNTERS
+\newcounter{cherrykey}%conta le keyword
+%%\newcounter{sectionkey}% conta le section prima della attuale: basta \thesection?
+%
+\makeatletter
+\newcommand{\listofsecframes}{%listofsecframes
+  \@starttocorig{secfr-\thesection}
+}
+\newcommand{\linkdest}[2][\@empty]{%
+    \hypertarget{\@empty}{#1}
+\Hy@raisedlink{%1
+\hypertarget{#2}{}
+}%1
+%%\phantomsection\label{#2}
+}
+%%\newcommand{\linkdest}[1]{\Hy@raisedlink{\hypertarget{#1}{}}}
+\newcommand\listofcherryframesbasic{\@starttocorig{cherryframes}}
+\newcommand\listofcherryframesname{Important frames}
+\newcommand\listofcherryframes{%
+\listofcherryframesname\phantomsection: \listofcherryframesbasic}
+\makeatother
+\usepackage{LocalF}
+\makeatletter%frameinlbf
+\newif\ifframeinlbf
+%\frameinlbftrue
+%%frameintoc
+%\ifframeinlbf
+%\mode<presentation>{%
+%        \only<1>{%
+%            %\hypertarget{\protect\insertframetitle}{}%
+%            %        \addcontentsline{cherryframes}{subsection}{%
+%                    %\protect\makebox[1em][l]{\normalsize\insertframenumber\hfill}
+%                       % \normalsize
+%           %            \protect\insertframetitle%
+%                    \addtocontents{cherryframes}{\protect\mycontentsline{section}{\parbox{0.48\textwidth}{\protect$\bullet$ \insertframetitle}}{}{}}
+%        }%
+%    }%
+%             \else\fi%
+%{}%from addbeamertemplate{frametitle}?
+\makeatother
+\addtobeamertemplate{frame end}{\frameinlbffalse
+}{}
+\usepackage{sources}
+\usepackage{mathOp}
+\title{Fisica stellare}
+
+% Let's get started
+\begin{document}
+%\input{tikzdir}%%contain tikz files as filecontents
+\addtolength{\textheight}{-0pt}
+\addtolength{\headheight}{0pt}
+\addtolength{\footskip}{0pt}
+
+
+% Section and subsections will appear in the presentation overview
+% and table of contents.
+%\frame{\tableofcontents[onlyparts]}
+
+\begin{frame}[fragile]{Fisica stellare: argomenti del corso}%label={}
+    %\framesubtitle{Main onlyparts TOC}
+   %\begin{columns}[T]%list of frame a inizio sezione
+    % \begin{column}{0.45\textwidth}
+    \tableofcontents[onlyparts]
+    %    \end{column}
+      %  \begin{column}{0.55\textwidth}
+      %      \listofcherryframes
+      %  \end{column}
+   % \end{columns}
+\end{frame}
+
+\begin{frame}{Fisica stellare: i frames pi\'u importanti}%label={}
+     \listofcherryframes
+\end{frame}
+
+\begin{frame}{Meta}
+    argomenti del corso: toc parts a sinistra e important frames a destra
+    todo, must: before reglez; frame importanti
+    listofframe all'inizio di ogni sezione per frames con sottotitolo
+frameinlbftrue: listofcherryframes
+\end{frame}
+
+\begin{frame}{Perch\'e studio queste cose?? Sviluppi; futuro.}
+Concretezza, concentrazione, indipendenza
+\end{frame}
+
+\part{Intro}%\linkdest{intro}
+\input{intro}
+\input{succo}
+
+\part{Modello Plasma stellare}%\linkdest{stellarplasma}
+\begin{frame}{this part toc}
+    \begin{itemize}
+        \item Recap recap stat phys gas of photons
+        \item Radiative transfer equation and solution in far interior
+        \item Recap atomic line light scattering
+        \item Nuclear Fusion
+    \end{itemize}
+\end{frame}
+\input{stellarplasmamodel}
+
+\part{Modelli stellari: struttura ed evoluzione}%\linkdest{evolutivemodels}
+\begin{frame}{this part toc}
+%\begin{columns}[T]
+%\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Eqs struttura stellare
+\item Meccanismi di trasporto e stabilit\'a
+\item Fenomenologia del plasma stellare
+\item Luminosity production. Nuclear reactions
+\item Metodi soluzione modello stellare
+\end{itemize}
+%\end{column}
+%\begin{column}{0.5\textwidth}
+%\tableofcontents
+%\end{column}
+%\end{columns}
+\end{frame}
+\input{starmodels}
+ 
+  \part{Formazione ed evoluzione stellare} 
+\begin{frame}{TOC formation evolution}
+\tableofcontents
+\end{frame}
+\input{starformation}
+\input{stellarevolution}
+ 
+ \part{Stellar population in the milky way}%\linkdest{constraints}
+\begin{frame}{this part toc}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+	\item Solar neighborhood
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\tableofcontents
+\end{column}
+\end{columns}
+\end{frame}
+\input{GalaxyStarImfPop}
+  
+\end{document}
