@@ -10,7 +10,7 @@
 %%%
 \usepackage[backend=biber,style=authoryear,maxcitenames=1,natbib=true]{biblatex}
 %%%
-\usepackage{ebgaramond}
+%\usepackage{ebgaramond}
 %\usepackage{pxfonts}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,textcomp,gensymb}
@@ -24,7 +24,14 @@
 \usepackage{subfig}
 \usepackage{refcount}
 \usepackage[normalem]{ulem} % either use this (simple) or
-\usepackage{hepnames}
+\usepackage[italic]{hepnames}
+%\usepackage{xpatch}
+%\makeatletter
+%\xpatchcmd\@HepConStyle
+% {\edef\@upcode{\updefault}}
+% {\ifdefined\shapedefault\edef\@upcode{\shapedefault}\else\edef\@upcode{\updefault}\fi}
+% {}{}
+%\makeatother
 %http://www.terminally-incoherent.com/blog/2007/09/19/latex-squeezing-the-vertical-white-space/
 
 \usepackage{verbatim}
